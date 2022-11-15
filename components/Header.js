@@ -3,13 +3,16 @@ import Image from "next/image"
 import { BellIcon, ChatIcon, ChevronDownIcon, HomeIcon, UserGroupIcon, ViewGridIcon } from "@heroicons/react/solid";
 import { FlagIcon, PlayIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 import HeaderIcon from './HeaderIcon';
+import { useSession, signOut } from "next-auth/react"
 
 function Header() {
+    const { data: session } = useSession()
+
     return (
-        <div className='stiicky top-0 z-999 bg-white flex items-center p-w lg:px-5 shadow-md'>
+        <div className='sticky top-0 z-999 bg-white flex items-center p-w lg:px-5 shadow-md'>
             {/*headerLeft*/}
             <div className="flex items-center">
-                <Image /* the NextJS Image component optimizes images, it lazy loads images and delivers it as a WebP image. */
+                <Image
                     src="https://links.papareact.com/5me"
                     width={40}
                     height={40}
@@ -36,9 +39,21 @@ function Header() {
             </div>
 
             {/*headerRight*/}
-            <div>
-            {/* Profile Picture */}
-            <p className='whitespace-nowrap font-semibold pr-3'>username text</p>
+            <div className='flex items-center sm:space-x-2 justify-end'>
+                {/* Profile Picture */}
+                <Image /* the NextJS Image component optimizes images, it lazy loads images and delivers it as a WebP image. */
+                    onClick={() => signOut()}
+                    className="rounded-full cursor-pointer"
+                    src={session.user.image}
+                    width="40"
+                    height="40"
+                    layout="fixed"
+                />
+                <p className='whitespace-nowrap font-semibold pr-3'>{session.user.name}</p>
+                <ViewGridIcon className='icon' />
+                <ChatIcon className='icon' />
+                <BellIcon className='icon' />
+                <ChevronDownIcon className='icon' />
             </div>
         </div>
     )

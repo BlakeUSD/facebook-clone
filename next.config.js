@@ -7,7 +7,7 @@ const nextConfig = {
 module.exports = {
   nextConfig,
   images: {
-    domains: ['links.papareact.com', 'platform-lookaside.fbsbsx.com', 'firebasesstorage.googleapis.com'],
+    domains: ['links.papareact.com', 'platform-lookaside.fbsbx.com', 'firebasestorage.googleapis.com'],
   },
 }
 
