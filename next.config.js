@@ -1,14 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
+// module.exports = {
+//   nextConfig,
+//   images: {
+//     domains: ['links.papareact.com', 'platform-lookaside.fbsbx.com', 'firebasestorage.googleapis.com'],
+//   },
+// }
 
-module.exports = {
-  nextConfig,
-  images: {
-    domains: ['links.papareact.com', 'platform-lookaside.fbsbx.com', 'firebasestorage.googleapis.com'],
-  },
-}
+module.exports = async (phase) => {
+  /** @type {import('next').NextConfig} */
+  const nextConfig = {
+    reactStrictMode: true,
+    swcMinify: true
+  };
+  const defaultConfig = {}
 
-/* Hey Dellano, to use external links for images with the NextJS Image component, the external sites have to be whitelisted */
+  return withPlugins([], nextConfig)(phase, { defaultConfig });
+};
